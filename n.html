@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <style>
+    body {
+      background-color: #e1f5fe;
+      font-family: 'Roboto', sans-serif;
+      color: #0d47a1;
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    h1 {
+      font-size: 40px;
+      color: #1e88e5;
+      margin-bottom: 20px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .container {
+      background-color: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      max-width: 600px;
+      width: 100%;
+      margin: 20px;
+    }
+
+    .pista {
+      font-size: 20px;
+      background-color: #2196f3;
+      color: white;
+      padding: 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s ease-in-out, transform 0.3s ease;
+    }
+
+    .pista:hover {
+      background-color: #1976d2;
+      transform: scale(1.05);
+    }
+
+    .input-container {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .input-container input {
+      font-size: 18px;
+      padding: 12px 20px;
+      border-radius: 8px;
+      border: 2px solid #1e88e5;
+      width: 80%;
+      max-width: 300px;
+      margin-top: 10px;
+      margin-bottom: 15px;
+      transition: border-color 0.3s;
+    }
+
+    .input-container input:focus {
+      border-color: #1565c0;
+    }
+
+    .btn-submit {
+      background-color: #2196f3;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: #1976d2;
+      transform: scale(1.05);
+    }
+
+    .final {
+      font-size: 26px;
+      color: #0d47a1;
+      background-color: #fff8e1;
+      padding: 30px;
+      border-radius: 12px;
+      margin-top: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      display: none;
+      text-align: center;
+      font-weight: bold;
+      color: #ff4081;
+    }
+
+    .final p {
+      font-size: 22px;
+      color: #0288d1;
+    }
+
+
+    .fade-in {
+      animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 30px;
+      }
+
+      .container {
+        padding: 20px;
+      }
+
+      .pista {
+        font-size: 18px;
+      }
+
+      .input-container input {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div id="pista1" class="pista fade-in">
+      <p>Pista 1: Qual é o número dito no segundo 52 da primeira música que enviei a você?</p>
+      <div class="input-container">
+        <input type="text" id="input1" maxlength="4" placeholder="Digite o número..." />
+        <button class="btn-submit" onclick="verificarResposta1()">Verificar Resposta</button>
+      </div>
+    </div>
+
+    <div id="pista2" class="pista fade-in" style="display: none;">
+      <p>Pista 2: O que significa?</p>
+      <p><strong>01110100 01100101 00100000 01100001 01101101 01101111</strong></p>
+      <div class="input-container">
+        <input type="text" id="input2" maxlength="6" placeholder="Digite a palavra..." />
+        <button class="btn-submit" onclick="verificarResposta2()">Verificar Resposta</button>
+      </div>
+    </div>
+
+    <div id="pista3" class="pista fade-in" style="display: none;">
+      <p>Pista 3: Qual é a inicial do peixe da última figurinha enviada?</p>
+      <div class="input-container">
+        <input type="text" id="input3" maxlength="1" placeholder="Digite a inicial..." />
+        <button class="btn-submit" onclick="verificarResposta3()">Verificar Resposta</button>
+      </div>
+    </div>
+
+    <div id="final" class="final" style="display: none;">
+      <p>pra garota dos olhos e do sorriso mais lindos<p>
+      <p><strong>Eu te amo muito! Como sou feliz em ter te conhecido</strong></p>
+      <p>AMO MUITO MUiTO MUITO</p>
+    </div>
+  </div>
+
+  <script>
+    const resposta1 = "1000";
+    const resposta2 = "te amo";
+    const resposta3 = "c";
+
+    let respostas = [];
+
+    function verificarResposta1() {
+      const input1 = document.getElementById('input1').value;
+      if (input1 === resposta1) {
+        respostas.push(input1);
+        document.getElementById('pista2').style.display = 'block';
+        document.getElementById('pista1').style.display = 'none';
+      } else {
+        alert('Resposta errada! Tente novamente.');
+      }
+    }
+
+    function verificarResposta2() {
+      const input2 = document.getElementById('input2').value.toLowerCase();
+      if (input2 === resposta2) {
+        respostas.push(input2);
+        document.getElementById('pista3').style.display = 'block';
+        document.getElementById('pista2').style.display = 'none';
+      } else {
+        alert('Resposta errada! Tente novamente.');
+      }
+    }
+
+    function verificarResposta3() {
+      const input3 = document.getElementById('input3').value.toLowerCase();
+      if (input3 === resposta3) {
+        respostas.push(input3);
+        document.getElementById('final').style.display = 'block';
+        document.getElementById('pista3').style.display = 'none';
+      } else {
+        alert('Resposta errada! Tente novamente.');
+      }
+    }
+  </script>
+
+</body>
+</html>
